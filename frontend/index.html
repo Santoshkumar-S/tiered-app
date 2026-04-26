@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiered AI Answers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <h1>Tiered AI</h1>
+        <button class="gear-btn" id="gearBtn" type="button" aria-label="Open settings">
+          ⚙
+        </button>
+      </header>
+
+      <section class="settings-popup hidden" id="settingsPopup">
+        <h2>Settings</h2>
+        <div class="mode-options">
+          <label class="mode-option">
+            <input type="radio" name="mode" value="native" id="nativeModeToggle" checked />
+            <span>Native Mode</span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="mode" value="developer" id="developerModeToggle" />
+            <span>Developer Mode (BYOK)</span>
+          </label>
+        </div>
+        <label class="api-key-label" for="apiKeyInput">OpenRouter API Key</label>
+        <input
+          type="password"
+          id="apiKeyInput"
+          class="api-key-input"
+          placeholder="sk-or-v1-..."
+          autocomplete="off"
+        />
+        <p class="settings-note">Developer Mode uses your key from localStorage.</p>
+      </section>
+
+      <main>
+        <section class="prompt-panel glass">
+          <label for="questionInput">Ask your question</label>
+          <textarea
+            id="questionInput"
+            rows="5"
+            placeholder="How does the internet work?"
+          ></textarea>
+          <button id="generateBtn" class="generate-btn" type="button">Generate</button>
+          <p class="mode-flag" id="modeFlag">Mode: Native (Render backend key)</p>
+          <p class="status-text" id="statusText"></p>
+          <p class="success-text hidden" id="successText">
+            Answer generated successfully! Click the cards below to view them.
+          </p>
+        </section>
+
+        <section class="cards-grid" id="cardsGrid">
+          <article class="answer-card card-eli5" data-tier="eli5">
+            <p class="card-tier-label">ELI5</p>
+            <div class="card-inner">
+              <div class="card-face card-front">Click to reveal</div>
+              <div class="card-face card-back" id="eli5Answer"></div>
+            </div>
+          </article>
+          <article class="answer-card card-intermediate" data-tier="intermediate">
+            <p class="card-tier-label">Intermediate</p>
+            <div class="card-inner">
+              <div class="card-face card-front">Click to reveal</div>
+              <div class="card-face card-back" id="intermediateAnswer"></div>
+            </div>
+          </article>
+          <article class="answer-card card-expert" data-tier="expert">
+            <p class="card-tier-label">Expert</p>
+            <div class="card-inner">
+              <div class="card-face card-front">Click to reveal</div>
+              <div class="card-face card-back" id="expertAnswer"></div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

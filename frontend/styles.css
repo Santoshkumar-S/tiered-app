@@ -1,0 +1,333 @@
+:root {
+  --bg-1: #070b1a;
+  --bg-2: #0e1730;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --text: #ebf2ff;
+  --muted: #b3bfdb;
+  --accent: #6ea8ff;
+  --success: #50ff9a;
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top, #132750, var(--bg-2) 42%, var(--bg-1) 100%);
+}
+
+.app-shell {
+  width: min(980px, 94vw);
+  margin: 2rem auto;
+  position: relative;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.gear-btn {
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  color: var(--text);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1.1rem;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.settings-popup {
+  position: absolute;
+  right: 0;
+  top: 58px;
+  width: min(350px, 90vw);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  background: rgba(12, 20, 43, 0.96);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.hidden {
+  display: none;
+}
+
+.settings-popup h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.mode-options {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.mode-option {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.api-key-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.api-key-input {
+  width: 100%;
+  border-radius: 0;
+  border: 1px solid var(--glass-border);
+  background: rgba(5, 9, 23, 0.95);
+  color: var(--text);
+  padding: 0.55rem 0.7rem;
+}
+
+.api-key-input:disabled {
+  background: rgba(90, 98, 120, 0.45);
+  color: #a9afc0;
+  border-color: rgba(169, 175, 192, 0.45);
+  cursor: not-allowed;
+}
+
+.settings-note {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+main {
+  margin-top: 1.2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.glass {
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.prompt-panel {
+  padding: 1rem;
+}
+
+.prompt-panel label {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: var(--muted);
+}
+
+textarea {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  background: rgba(9, 15, 34, 0.9);
+  color: var(--text);
+  resize: vertical;
+  min-height: 115px;
+  padding: 0.8rem;
+}
+
+.generate-btn {
+  margin-top: 0.8rem;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.7rem 1.2rem;
+  color: var(--text);
+  background: linear-gradient(130deg, #3b7fff, #6ea8ff);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.status-text {
+  min-height: 1.3rem;
+  margin: 0.7rem 0 0;
+  color: #ffcf86;
+}
+
+.success-text {
+  margin: 0.6rem 0 0;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.mode-flag {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.answer-card {
+  perspective: 1100px;
+  cursor: pointer;
+  min-height: 252px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.card-tier-label {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  flex: 1;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.answer-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  word-break: break-word;
+  line-height: 1.45;
+}
+
+.card-back::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.card-back pre {
+  margin: 0.7rem 0;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(6, 10, 24, 0.92);
+  overflow-x: auto;
+}
+
+.card-back code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+.card-back :not(pre) > code {
+  background: rgba(6, 10, 24, 0.72);
+  padding: 0.15rem 0.35rem;
+  border-radius: 8px;
+}
+
+.card-back .katex-display {
+  margin: 0.8rem 0;
+  padding: 0.55rem 0.25rem;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.card-back img,
+.card-back table {
+  max-width: 100%;
+}
+
+.card-back table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.card-back th,
+.card-back td {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.35rem 0.55rem;
+}
+
+@media (max-width: 640px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-back {
+  /* Existing styles... */
+  display: block;            /* Change from flex to block to fix vertical stacking */
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;    /* Ensures padding doesn't push the width out */
+  overflow-y: auto;          /* Scrollbar for long content */
+  text-align: left;
+  white-space: normal;       /* Ensures text wraps naturally */
+  line-height: 1.5;           /* Better readability */
+}
+
+/* Ensure the text itself doesn't have a forced narrow width */
+.card-back p, .card-back div {
+  width: 100%;
+  margin-bottom: 10px;
+  word-wrap: break-word;      /* Prevents long words from breaking layout */
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px; /* Or whatever your design calls for */
+}
+
