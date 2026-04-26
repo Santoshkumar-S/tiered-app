@@ -2,7 +2,7 @@ const isLocal = window.location.hostname === "localhost" || window.location.host
 
 const NATIVE_BACKEND_URL = isLocal 
     ? "http://127.0.0.1:8000/generate" 
-    : "https://your-backend-name.onrender.com/generate";
+    : "https://tiered-app-backend.onrender.com";
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const SYSTEM_INSTRUCTION =
   "You are a JSON-only API. Escape all backslashes in LaTeX formulas (use \\\\ instead of \\). Use $ for inline math and $$ for block math. Return ONLY the JSON object with keys: eli5, intermediate, expert.";
